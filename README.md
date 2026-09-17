@@ -75,13 +75,15 @@ cd movie-explorer
 3. Install Dependencies
 Run the following command to install all required packages (including react-router, lucide-react, and tailwindcss):
 
-Bash
+```text
 npm install
+```
 4. Run Development Server
 Start the Vite local development server:
 
-Bash
+```text
 npm run dev
+```
 Open your browser and navigate to the printed local URL (typically http://localhost:5173).
 
 ## 🌐 API Endpoints Used
