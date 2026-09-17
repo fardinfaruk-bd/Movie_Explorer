@@ -2,18 +2,20 @@ import { useState, useEffect } from "react";
 import SearchBar from "../../components/SearchBar";
 import MovieCard from "../../components/MovieCard";
 import { getMovies } from "../../actions/Movie";
+import MovieModal from "../../components/MovieModal";
 
 const MoviesPage = () => {
     const [movies, setMovies] = useState([]);
-    const [searchTerm, setSearchTerm] = useState(""); // Start with empty search input
+    const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     useEffect(() => {
         const fetchMovies = async () => {
             setLoading(true);
             try {
                 let url = "";
-
                 if (!searchTerm.trim()) {
                     url = "https://api.tvmaze.com/shows";
                 } else {
@@ -58,7 +60,11 @@ const MoviesPage = () => {
                 ) : movies.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                         {movies.map((movie) => (
-                            <MovieCard key={movie.show.id} movie={movie} />
+                            <MovieCard 
+                                key={movie.show.id} 
+                                movie={movie} 
+                                onSelect={(showData) => setSelectedMovie(showData)} 
+                            />
                         ))}
                     </div>
                 ) : (
@@ -69,6 +75,13 @@ const MoviesPage = () => {
                     </div>
                 )}
             </div>
+
+            {selectedMovie && (
+                <MovieModal
+                    movie={selectedMovie} 
+                    onClose={() => setSelectedMovie(null)} 
+                />
+            )}
         </div>
     );
 };

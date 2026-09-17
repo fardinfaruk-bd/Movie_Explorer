@@ -1,7 +1,7 @@
-import { Link } from "react-router";
+import { Calendar, Star } from "lucide-react";
 
-const MovieCard = ({ movie }) => {
-    const { id, name, image, rating, premiered } = movie.show;
+const MovieCard = ({ movie, onSelect }) => {
+    const { name, image, rating, premiered } = movie.show;
     const year = premiered ? premiered.split("-")[0] : "N/A";
     const score = rating?.average ? rating.average : "N/A";
     const poster = image?.medium || "https://via.placeholder.com/210x295?text=No+Poster";
@@ -16,7 +16,6 @@ const MovieCard = ({ movie }) => {
                 />
             </div>
 
-            
             <div className="p-4 flex flex-col grow justify-between space-y-4">
                 <div>
                     <h3 className="text-lg font-bold text-white line-clamp-1" title={name}>
@@ -25,23 +24,23 @@ const MovieCard = ({ movie }) => {
                     
                     <div className="flex items-center space-x-3 mt-2 text-sm text-gray-300">
                         <span className="flex items-center space-x-1 text-amber-400 font-semibold">
-                            <span>⭐</span>
+                            <span><Star className="w-4 h-4"/></span>
                             <span>{score}</span>
                         </span>
                         <span className="text-gray-500">•</span>
                         <span className="flex items-center space-x-1">
-                            <span>📅</span>
+                            <span><Calendar className="w-4 h-4" /></span>
                             <span>{year}</span>
                         </span>
                     </div>
                 </div>
 
-                <Link 
-                    to={`/movies/${id}`}
-                    className="w-full py-2 bg-linear-to-r from-orange-500 via-pink-600 to-purple-700 hover:brightness-110 text-white font-medium text-center rounded-lg transition duration-200 shadow-md active:scale-95"
+                <button 
+                    onClick={() => onSelect(movie.show)}
+                    className="w-full py-2 bg-linear-to-r from-orange-500 via-pink-600 to-purple-700 hover:brightness-110 text-white font-medium text-center rounded-lg transition duration-200 shadow-md active:scale-95 cursor-pointer"
                 >
                     See Details
-                </Link>
+                </button>
             </div>
         </div>
     );
