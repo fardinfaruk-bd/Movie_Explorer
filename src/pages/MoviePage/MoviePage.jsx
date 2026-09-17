@@ -55,7 +55,7 @@ const MoviesPage = () => {
 
                 {loading ? (
                     <div className="flex justify-center items-center py-20 text-gray-400">
-                        <span className="animate-pulse text-lg">Loading movies...</span>
+                        <div className="w-10 h-10 border-4 border-gray-300 border-t-gray-800 rounded-full animate-spin"></div>
                     </div>
                 ) : movies.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
