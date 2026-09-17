@@ -1,5 +1,4 @@
-import HeroImage from "../assets/images/Hero_Image.png";
-
+import HeroImage from '../../assets/images/Hero_Image.png';
 const Hero = () => {
     return (
         <div 
@@ -16,7 +15,6 @@ const Hero = () => {
                     DISCOVER MOVIES
                 </h1>
 
-                {/* Subtitle / Description */}
                 <p className="text-lg md:text-xl text-gray-200 max-w-lg leading-relaxed">
                     Explore and discover your favorite movies from around the world.
                 </p>

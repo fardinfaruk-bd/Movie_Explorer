@@ -1,28 +1,51 @@
+import { Link } from "react-router";
 import Logo from "../assets/images/Logo.png";
 
 const Navbar = () => {
-    return (
-        <nav className="w-full border-b border-gray-300 bg-slate-50/50 backdrop-blur-sm px-6 py-4">
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
-                {/* Logo and Brand Title */}
-                <div className="flex items-center space-x-3 cursor-pointer">
-                    <img src={Logo} alt="MovieExplorer Logo" className="w-7 h-7 object-contain" />
-                    <span className="text-xl font-semibold tracking-wide text-gray-800">
-                        MovieExplorer
-                    </span>
-                </div>
+  return (
+    <nav className="absolute top-0 left-0 z-50 w-full border-b border-white/20 bg-transparent px-6 py-4">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="flex items-center space-x-3 cursor-pointer">
+          <img
+            src={Logo}
+            alt="MovieExplorer Logo"
+            className="w-7 h-7 object-contain"
+          />
+          <span className="text-xl font-semibold tracking-wide text-white">
+            MovieExplorer
+          </span>
+        </div>
 
-                <div>
-                    <a 
-                        href="#movies" 
-                        className="px-4 py-2 text-gray-800 font-medium hover:text-blue-600 transition-colors duration-200"
-                    >
-                        Movies
-                    </a>
-                </div>
-            </div>
-        </nav>
-    );
+        <div>
+          <Link
+            to="/movies"
+            className="
+            px-5 py-2.5 
+            text-white font-semibold 
+            rounded-full 
+            
+            bg-gradient-to-r 
+            from-orange-500 
+            via-pink-600 
+            to-purple-700 
+
+            hover:bg-gradient-to-r 
+            hover:from-purple-700
+            hover:via-pink-600 
+            hover:to-orange-500 
+          
+            transition-all duration-300 ease-in-out
+            hover:shadow-lg hover:brightness-110
+            active:scale-95
+            inline-flex items-center justify-center
+        "
+          >
+            Movies
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
 };
 
 export default Navbar;
