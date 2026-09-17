@@ -92,5 +92,5 @@ Fetch Default Shows: GET https://api.tvmaze.com/shows
 
 Search Shows: GET https://api.tvmaze.com/search/shows?q=:query
 
-📄 License
+## 📄 License
 This project is licensed under the MIT License.
