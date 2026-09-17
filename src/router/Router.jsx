@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../Layout/RootLayout";
 import Hero from "../pages/Homepage/Hero";
+import MoviesPage from "../pages/MoviePage/MoviePage";
 
 export const router = createBrowserRouter([
     {
@@ -10,6 +11,10 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: Hero,
+            },
+            {
+                path: "/movies",
+                Component: MoviesPage
             }
         ]
     }

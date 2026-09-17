@@ -1,32 +1,40 @@
 import { useState, useEffect } from "react";
-import MovieCard from "../components/MovieCard";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../../components/SearchBar";
+import MovieCard from "../../components/MovieCard";
+import { getMovies } from "../../actions/Movie";
 
 const MoviesPage = () => {
     const [movies, setMovies] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("girls"); // Default query
+    const [searchTerm, setSearchTerm] = useState(""); // Start with empty search input
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchMovies = async () => {
-            if (!searchTerm.trim()) {
-                setMovies([]);
-                return;
-            }
-
             setLoading(true);
             try {
-                const response = await fetch(
-                    `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(searchTerm)}`
-                );
-                const data = await response.json();
-                setMovies(data);
+                let url = "";
+
+                if (!searchTerm.trim()) {
+                    url = "https://api.tvmaze.com/shows";
+                } else {
+                    url = `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(searchTerm)}`;
+                }
+
+                const data = await getMovies(url);
+
+                if (!searchTerm.trim()) {
+                    setMovies(data.map((show) => ({ show })));
+                } else {
+                    setMovies(data);
+                }
             } catch (error) {
                 console.error("Error fetching movies:", error);
             } finally {
                 setLoading(false);
             }
-        };        const timer = setTimeout(() => {
+        };
+
+        const timer = setTimeout(() => {
             fetchMovies();
         }, 400);
 
@@ -45,7 +53,7 @@ const MoviesPage = () => {
 
                 {loading ? (
                     <div className="flex justify-center items-center py-20 text-gray-400">
-                        <span className="animate-pulse text-lg">Searching movies...</span>
+                        <span className="animate-pulse text-lg">Loading movies...</span>
                     </div>
                 ) : movies.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
@@ -55,7 +63,9 @@ const MoviesPage = () => {
                     </div>
                 ) : (
                     <div className="text-center py-20 text-gray-400">
-                        <p className="text-lg">No movies found for "{searchTerm}".</p>
+                        <p className="text-lg">
+                            {searchTerm ? `No movies found for "${searchTerm}".` : "No movies available."}
+                        </p>
                     </div>
                 )}
             </div>
